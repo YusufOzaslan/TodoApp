@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
-import { Todo } from '@/app/page'
+import { Todo } from '../app/page'
 import { motion } from 'framer-motion'
 
 export default function TodoItem({ todo, onToggle, onDelete, onEdit }: {

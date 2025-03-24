@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react'
-import TodoForm from '@/components/TodoForm'
-import TodoList from '@/components/TodoList'
+import TodoForm from '../components/TodoForm'
+import TodoList from '../components/TodoList'
 import { motion } from 'framer-motion'
 
 export interface Todo {

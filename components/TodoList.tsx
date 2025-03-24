@@ -1,5 +1,5 @@
-import { Todo } from '@/app/page'
-import TodoItem from '@/components/TodoItem'
+import { Todo } from '../app/page'
+import TodoItem from './TodoItem'
 import { AnimatePresence } from 'framer-motion'
 
 interface TodoListProps {
