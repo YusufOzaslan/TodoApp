@@ -1,26 +1,46 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --background: 249 250 251;
+  --foreground: 15 23 42;
+  --card: 255 255 255;
+  --card-foreground: 15 23 42;
+  --primary: 79 70 229;
+  --primary-foreground: 255 255 255;
+  --muted: 241 245 249;
+  --muted-foreground: 100 116 139;
+  --border: 226 232 240;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: 15 23 42;
+    --foreground: 248 250 252;
+    --card: 30 41 59;
+    --card-foreground: 248 250 252;
+    --primary: 99 102 241;
+    --muted: 51 65 85;
+    --muted-foreground: 148 163 184;
+    --border: 51 65 85;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  @apply bg-[rgb(var(--background))] text-[rgb(var(--foreground))] antialiased min-h-screen;
 }
+
+@layer components {
+  .card {
+    @apply bg-[rgb(var(--card))] text-[rgb(var(--card-foreground))] rounded-[0.75rem] border border-[rgb(var(--border))] shadow-sm hover:shadow-md transition-all;
+  }
+
+  .input {
+    @apply w-full px-4 py-2 bg-[rgb(var(--card))] border border-[rgb(var(--border))] rounded-lg outline-none focus:ring-2 focus:ring-[rgb(var(--primary))] text-[rgb(var(--card-foreground))] placeholder-[rgb(var(--muted-foreground))];
+  }
+
+  .btn-primary {
+    @apply px-6 py-2.5 bg-[rgb(var(--primary))] text-[rgb(var(--primary-foreground))] rounded-lg hover:opacity-90 transition-all font-medium shadow-sm hover:shadow-md active:scale-95;
+  }
+} 
