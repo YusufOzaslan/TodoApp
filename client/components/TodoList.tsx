@@ -1,15 +1,14 @@
-import { Todo } from '../app/page'
+import { Todo } from '../hooks/useTodos'
 import TodoItem from './TodoItem'
 import { AnimatePresence } from 'framer-motion'
 
 interface TodoListProps {
   todos: Todo[]
-  onToggle: (id: string) => void
-  onDelete: (id: string) => void
-  onEdit: (id: string, newText: string) => void
+  onDelete: (id: string) => Promise<boolean>
+  onToggle: (id: string) => Promise<boolean>
 }
 
-export default function TodoList({ todos, onToggle, onDelete, onEdit }: TodoListProps) {
+export default function TodoList({ todos, onDelete, onToggle }: TodoListProps) {
   const completedTodos = todos.filter(todo => todo.completed)
   const activeTodos = todos.filter(todo => !todo.completed)
 
@@ -23,9 +22,8 @@ export default function TodoList({ todos, onToggle, onDelete, onEdit }: TodoList
               <TodoItem
                 key={todo.id}
                 todo={todo}
-                onToggle={onToggle}
                 onDelete={onDelete}
-                onEdit={onEdit}
+                onToggle={onToggle}
               />
             ))}
           </AnimatePresence>
@@ -41,9 +39,8 @@ export default function TodoList({ todos, onToggle, onDelete, onEdit }: TodoList
                 <TodoItem
                   key={todo.id}
                   todo={todo}
-                  onToggle={onToggle}
                   onDelete={onDelete}
-                  onEdit={onEdit}
+                  onToggle={onToggle}
                 />
               ))}
             </AnimatePresence>

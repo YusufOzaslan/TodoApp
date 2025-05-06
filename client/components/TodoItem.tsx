@@ -1,28 +1,11 @@
-import { useState, useRef, useEffect } from 'react'
-import { Todo } from '../app/page'
+import { Todo } from '../hooks/useTodos'
 import { motion } from 'framer-motion'
 
-export default function TodoItem({ todo, onToggle, onDelete, onEdit }: {
+export default function TodoItem({ todo, onDelete, onToggle }: {
   todo: Todo
-  onToggle: (id: string) => void
-  onDelete: (id: string) => void
-  onEdit: (id: string, newText: string) => void
+  onDelete: (id: string) => Promise<boolean>
+  onToggle: (id: string) => Promise<boolean>
 }) {
-  const [isEditing, setIsEditing] = useState(false)
-  const [editText, setEditText] = useState(todo.text)
-  const inputRef = useRef<HTMLInputElement>(null)
-
-  useEffect(() => {
-    if (isEditing && inputRef.current) inputRef.current.focus()
-  }, [isEditing])
-
-  const handleEdit = () => {
-    if (editText.trim() && editText !== todo.text) {
-      onEdit(todo.id, editText.trim())
-    }
-    setIsEditing(false)
-  }
-
   return (
     <motion.div
       layout
@@ -46,24 +29,11 @@ export default function TodoItem({ todo, onToggle, onDelete, onEdit }: {
           )}
         </button>
 
-        {isEditing ? (
-          <input
-            ref={inputRef}
-            type="text"
-            value={editText}
-            onChange={(e) => setEditText(e.target.value)}
-            onBlur={handleEdit}
-            onKeyDown={(e) => e.key === 'Enter' && handleEdit()}
-            className="input flex-1"
-          />
-        ) : (
-          <div 
-            className={`flex-1 ${todo.completed ? 'text-[rgb(var(--muted-foreground))] line-through' : ''}`}
-            onDoubleClick={() => setIsEditing(true)}
-          >
-            {todo.text}
-          </div>
-        )}
+        <div 
+          className={`flex-1 ${todo.completed ? 'text-[rgb(var(--muted-foreground))] line-through' : ''}`}
+        >
+          {todo.text}
+        </div>
 
         <button
           onClick={() => onDelete(todo.id)}

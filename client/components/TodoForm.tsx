@@ -13,7 +13,7 @@ export default function TodoForm({ onAdd }: { onAdd: (text: string) => void }) {
   }
 
   return (
-    <motion.form 
+    <motion.form
       onSubmit={handleSubmit}
       initial={{ scale: 0.98 }}
       animate={{ scale: 1 }}
