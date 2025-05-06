@@ -83,6 +83,8 @@ DATABASES = {
         'NAME': 'todoapp',
         'USER': 'postgres',
         'PASSWORD': 'yusuf',
+        #'HOST': 'host.docker.internal',
+        #'HOST': 'localhost',
         'HOST': 'postgres-db',
         'PORT': '5432',
     }
